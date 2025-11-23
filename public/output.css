@@ -1208,6 +1208,10 @@ body{
   background-color: hsl(var(--primary));
 }
 
+.hover\:bg-primary\/10:hover{
+  background-color: hsl(var(--primary) / 0.1);
+}
+
 .hover\:bg-primary\/90:hover{
   background-color: hsl(var(--primary) / 0.9);
 }

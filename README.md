@@ -1,6 +1,6 @@
 # EV Life Chat
 
-A modern, AI-powered chat application designed to answer all your questions about Electric Vehicles. Built with Preact, Tailwind CSS, and Cloudflare Pages.
+A modern, AI-powered chat application designed to answer all your questions about Electric Vehicles. Built with Antigravity, Preact, Tailwind CSS, and Cloudflare Pages.
 
 ## Features
 
@@ -27,7 +27,7 @@ A modern, AI-powered chat application designed to answer all your questions abou
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/halans/gpt-electricvehicle-life-preact
    cd gpt-electricvehicle-life-preact
    ```
 
