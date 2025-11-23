@@ -1,0 +1,12 @@
+{
+    "name": "ASK AI ABOUT EV",
+    "short_name": "AskAI",
+    "lang": "en-AU",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FAF9F6",
+    "theme_color": "#FAF9F6",
+    "description": "Ask AI about Electric Vehicles",
+    "icons": [],
+    "orientation": "landscape"
+  }
