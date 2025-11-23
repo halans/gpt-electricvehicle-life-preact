@@ -1,0 +1,7 @@
+.cache
+.wrangler
+node_modules
+dist
+stats.html
+.dev.vars
+.env.local
