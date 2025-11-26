@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "preact/hooks";
 import { Message } from "../types";
 import Markdown from 'markdown-to-jsx';
-import { Send, Sparkles, Zap, Battery, Shield, HelpCircle, Car, Info, User, Bot } from 'lucide-preact';
+import { Send, Sparkles, Zap, Battery, Shield, HelpCircle, Car, Info, User, Bot, ChevronDown, ChevronRight } from 'lucide-preact';
 
 const MAX_MESSAGES = 10;
 const MAX_QUESTION_LENGTH = 200;
@@ -124,7 +124,20 @@ export const Chat = () => {
   const [input, setInput] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+  const [expandedCategories, setExpandedCategories] = useState<Set<number>>(new Set([0]));
   const chatWindowRef = useRef<HTMLDivElement>(null);
+
+  const toggleCategory = (index: number) => {
+    setExpandedCategories(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
+      return newSet;
+    });
+  };
 
   const scrollToBottom = () => {
     if (chatWindowRef.current) {
@@ -231,22 +244,32 @@ export const Chat = () => {
             <div className="space-y-6">
               {INSPIRATION_CATEGORIES.map((category, idx) => (
                 <div key={idx} className="space-y-3 animate-in fade-in slide-in-from-bottom-3 duration-500" style={{ animationDelay: `${idx * 100}ms` }}>
-                  <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => toggleCategory(idx)}
+                    className="flex items-center gap-2 w-full text-left hover:opacity-70 transition-opacity"
+                  >
+                    {expandedCategories.has(idx) ? (
+                      <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                    ) : (
+                      <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                    )}
                     {category.icon}
                     <h3 className="font-semibold text-foreground">{category.title}</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {category.questions.map((q, qIdx) => (
-                      <button
-                        key={qIdx}
-                        onClick={() => sendMessage(q.prompt)}
-                        disabled={loading}
-                        className="text-sm bg-secondary/50 hover:bg-primary hover:text-primary-foreground px-4 py-2 rounded-full transition-colors duration-200 text-left"
-                      >
-                        {q.label}
-                      </button>
-                    ))}
-                  </div>
+                  </button>
+                  {expandedCategories.has(idx) && (
+                    <div className="flex flex-wrap gap-2 ml-7 animate-in fade-in slide-in-from-top-2 duration-300">
+                      {category.questions.map((q, qIdx) => (
+                        <button
+                          key={qIdx}
+                          onClick={() => sendMessage(q.prompt)}
+                          disabled={loading}
+                          className="text-sm bg-secondary/50 hover:bg-primary hover:text-primary-foreground px-4 py-2 rounded-full transition-colors duration-200 text-left"
+                        >
+                          {q.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
