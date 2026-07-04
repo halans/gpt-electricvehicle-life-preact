@@ -364,36 +364,39 @@ export const Chat = () => {
             </div>
           )}
 
-          <form
-            onSubmit={onSubmit}
-            className="relative flex items-center shadow-sm rounded-full bg-background ring-1 ring-border focus-within:ring-2 focus-within:ring-ring transition-all duration-200"
-          >
-            <button
-              type="button"
-              onClick={() => setShowSuggestions(!showSuggestions)}
-              className={`p-3 ml-1 rounded-full text-muted-foreground bg-primary/5 hover:text-primary hover:bg-primary/10 transition-colors ${showSuggestions ? 'text-primary bg-primary/10' : ''}`}
-              title="Get inspiration"
+          <div className="relative">
+            <form
+              onSubmit={onSubmit}
+              className="relative flex items-center shadow-sm rounded-full bg-background ring-1 ring-border focus-within:ring-2 focus-within:ring-ring transition-all duration-200"
             >
-              <Sparkles className="w-5 h-5" />
-            </button>
-            <input
-              id="question"
-              className="flex-1 bg-transparent border-none outline-none px-4 py-4 text-base placeholder:text-muted-foreground"
-              placeholder="Ask anything about EVs..."
-              type="text"
-              value={input}
-              onInput={(e) => setInput((e.target as any)?.value ?? "")}
-              maxLength={MAX_QUESTION_LENGTH}
-              disabled={loading}
-            />
-            <button
-              type="submit"
-              disabled={loading || !input.trim()}
-              className="p-3 mr-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              <Send className="w-5 h-5" />
-            </button>
-          </form>
+              <button
+                type="button"
+                onClick={() => setShowSuggestions(!showSuggestions)}
+                className={`p-3 ml-1 rounded-full text-muted-foreground bg-primary/5 hover:text-primary hover:bg-primary/10 transition-colors ${showSuggestions ? 'text-primary bg-primary/10' : ''}`}
+                title="Get inspiration"
+              >
+                <Sparkles className="w-5 h-5" />
+              </button>
+              <input
+                id="question"
+                className="flex-1 bg-transparent border-none outline-none px-4 py-4 text-base placeholder:text-muted-foreground"
+                placeholder="Ask anything about EVs..."
+                type="text"
+                value={input}
+                onInput={(e) => setInput((e.target as any)?.value ?? "")}
+                maxLength={MAX_QUESTION_LENGTH}
+                disabled={loading}
+              />
+              <button
+                type="submit"
+                disabled={loading || !input.trim()}
+                className="p-3 mr-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                <Send className="w-5 h-5" />
+              </button>
+            </form>
+            <div className="h-0.5 mt-2 rounded-full overflow-hidden bg-gradient-to-r from-transparent via-primary to-transparent animate-gradient-x" style={{ backgroundSize: '200% 100%' }}></div>
+          </div>
           <p className="text-center text-muted-foreground mt-3">
             AI can make mistakes. Please verify important information.
           </p>
